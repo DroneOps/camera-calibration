@@ -7,7 +7,7 @@ import os
 import cv2 as cv
 import time
 from djitellopy import Tello
-
+import captureImage as cpi
 
 tello = Tello()
 
@@ -27,14 +27,12 @@ cap = tello.get_frame_read()
 
 while 1:
     image = cap.frame
-   
-    cv.imshow("Image", image)
 
-
-    key = cv.waitKey(1) & 0xFF
-    if key == ord('q'):
-        break
+    quit = cpi.captureImage(image)
+    if not quit:
+        break 
+    
 
 tello.streamoff()
-cv.destroyAllWindows()
+
     
