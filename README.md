@@ -62,3 +62,5 @@ If `findChessboardCorners` cannot detect the pattern:
 - avoid blur and strong reflections
 - capture images from different angles
 
+The calibration matrix in this repo is for the djitello camera, but you can use your own images to compute a new calibration matrix.
+
