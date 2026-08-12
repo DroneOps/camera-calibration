@@ -12,14 +12,14 @@ import glob
 #if your chessboard has 13x10 counting the squares putting chessboard in vertical position.
 num_rows = 13 # change this to match yours
 num_cols = 10 # change this to match yours
-checkboard_size = (num_rows - 1, num_cols - 1) # we subtract 1 because the number of inner corners is one less than the number of squares
+chessboard_size = (num_rows - 1, num_cols - 1) # we subtract 1 because the number of inner corners is one less than the number of squares
 
 # termination criteria
 criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
 # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
-objp = np.zeros((checkboard_size[0]*checkboard_size[1],3), np.float32)
-objp[:,:2] = np.mgrid[0:checkboard_size[1],0:checkboard_size[0]].T.reshape(-1,2)
+objp = np.zeros((chessboard_size[0]*chessboard_size[1],3), np.float32)
+objp[:,:2] = np.mgrid[0:chessboard_size[1],0:chessboard_size[0]].T.reshape(-1,2)
 
 # Arrays to store object points and image points from all the images.
 objpoints = [] # 3d point in real world space
@@ -35,7 +35,7 @@ for fname in images:
 
 
     # Find the chess board corners
-    ret, corners = cv.findChessboardCorners(gray, checkboard_size, None) 
+    ret, corners = cv.findChessboardCorners(gray, chessboard_size, None) 
 
     print(f"Chessboard corners found: {ret}")
 
@@ -43,13 +43,13 @@ for fname in images:
         print("Getting Calibration Matrix")
         objpoints.append(objp)
 
-        corners2 = cv.cornerSubPix(gray,corners, checkboard_size, (-1,-1), criteria)
+        corners2 = cv.cornerSubPix(gray,corners, chessboard_size, (-1,-1), criteria)
         imgpoints.append(corners2)
 
         # Draw and display the corners
 
         print("Showing chessboard, press any key to exit")
-        cv.drawChessboardCorners(img, checkboard_size, corners2, ret)
+        cv.drawChessboardCorners(img, chessboard_size, corners2, ret)
         cv.imshow('img', img)
         cv.waitKey(0)
 
