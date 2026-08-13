@@ -4,7 +4,13 @@ A simple script to capture an image from the webcam and save it to a file.
 
 import cv2 as cv
 import time
+import os
 printed = False
+
+def fileCounter(name, counter, extension):
+    file = f"{name}{counter}.{extension}"
+    return file
+    
 
 def captureImage(frame):
     global printed
@@ -18,13 +24,21 @@ def captureImage(frame):
     cv.imshow('image', frame)
     key = cv.waitKey(1) & 0xFF
 
+    '''Saving images'''
     if key == ord('s'):
         print("Capturing image")
+        imageName = "Chessboard"
+        imageCounter = 0
+        imageExtension = "jpg"
+        file = fileCounter(imageName,imageCounter, imageExtension)
+        while(os.path.exists(file)):
+            imageCounter += 1
+            file = fileCounter(imageName,imageCounter, imageExtension)
 
-        success = cv.imwrite('image.jpg', frame) # change the name if you need to
+        success = cv.imwrite(file, frame) 
         if(success):
             print("----")
-            print("Done")
+            print(f"Done saved as {file} ")
             print("----")
             time.sleep(3)
         else:

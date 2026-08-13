@@ -10,9 +10,9 @@ import glob
 
 #Chessboard size, number of squares.
 #if your chessboard has 13x10 counting the squares putting chessboard in vertical position.
-num_rows = 13 # change this to match yours
-num_cols = 10 # change this to match yours
-chessboard_size = (num_rows - 1, num_cols - 1) # we subtract 1 because the number of inner corners is one less than the number of squares
+num_rows, nums_cols = 13, 10# change this to match yours or you can comment this line and used directly the inner corners count
+inner_corner = (num_rows-1, nums_cols-1) 
+chessboard_size = (inner_corner[0], inner_corner[1]) # we subtract 1 because the number of inner corners is one less than the number of squares
 
 # termination criteria
 criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)
